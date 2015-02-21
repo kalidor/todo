@@ -77,18 +77,13 @@ module Todo
         puts "[-] Empty TODO list"
         return
       end
-      max_length = 0
-      @tasks.map{|k, v|
-        max_length = (k.length > max_length)?(k.length):(max_length)
-      }
-      $MAX_WIDTH = $MAX_WIDTH - max_length - 4
-      done_tasks = @tasks.select{|k,v|
+      todo_tasks = @tasks.select{|k,v|
         (opts['all'])?(v <= 100):(v < 100)
       }
-      diff = @tasks.size - done_tasks.size
+      diff = @tasks.size - todo_tasks.size
       (puts "[+] %d hidden complete task(s)" % diff) if diff > 0
-      done_tasks.map{|k,v|
-        color_size = (v * $MAX_WIDTH) / 100
+      todo_tasks.map{|k,v|
+        color_size = (v * (k.length+6)) / 100
         color = compute_color(v)
         puts "#{@index[k]}) " + ("#{k} (#{v}%) "+" " * color_size).partial_colorize(color_size, color)
       }
