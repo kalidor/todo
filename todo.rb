@@ -8,8 +8,6 @@ require 'optparse'
 
 CONF = File.join(ENV["HOME"],".todo.yaml")
 
-$MAX_WIDTH = `stty size`.strip().split(" ")[1].to_i
-
 class String
   def colorize(color_code)
     # 31 = red
