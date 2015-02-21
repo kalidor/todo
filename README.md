@@ -1,5 +1,7 @@
-Simple TODO program in cmdline. Create and update ```~/.todo.yaml``` file.
+Todo program
 --
+Simple TODO program in cmdline. Create and update ```~/.todo.yaml``` file.
+
 ```bash
 $todo -h
 Usage: todo [options]
