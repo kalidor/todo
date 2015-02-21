@@ -81,7 +81,7 @@ module Todo
         (opts['all'])?(v <= 100):(v < 100)
       }
       diff = @tasks.size - todo_tasks.size
-      (puts "[+] %d hidden complete task(s)" % diff) if diff > 0
+      (puts "[+] %d finished task(s) hidden" % diff) if diff > 0
       todo_tasks.map{|k,v|
         color_size = (v * (k.length+6)) / 100
         color = compute_color(v)
@@ -110,6 +110,7 @@ module Todo
       (puts "[-] Miss integer value"; return) if not opts['new'].length >= 2
       @tasks[opts['new'].first] = opts['new'][1].to_i
       save()
+      load()
       display_status(opts)
     end
   end
