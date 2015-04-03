@@ -129,9 +129,9 @@ if $0 == __FILE__
   #todo
   #@options.on('-p', '--pull', 'Pull') { opts['pull'] = true }
   #@options.on('-P', '--push', 'Push') { opts['push'] = true }
-  @options.on('-a', '--all', 'Show all tasks (complete tasks)') { opts['all'] = true }
+  @options.on('-s', '--show', 'Show all tasks (complete tasks)') { opts['all'] = true }
   @options.on('-u', '--update task_num,level', Array, 'Update task using id') {|opt| opts['update'] = opt }
-  @options.on('-n', '--new task,level', Array, 'Adding a task to todo') {|opt| opts['new'] = opt }
+  @options.on('-a', '--add task,level', Array, 'Adding a task to todo') {|opt| opts['new'] = opt }
   @options.on('-d', '--del task', 'Delete a task') {|opt| opts['delete'] = opt }
   begin
     @options.parse(ARGV)
