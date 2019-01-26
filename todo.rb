@@ -81,10 +81,14 @@ module Todo
       diff = @tasks.size - todo_tasks.size
       (puts "[+] %d finished task(s) hidden" % diff) if diff > 0
       todo_tasks.map{|k,v|
-        color_size = (v * (k.length+6)) / 100
-        color = compute_color(v)
-        puts "#{@index[k]}) " + ("#{k} (#{v}%) "+" " * color_size).partial_colorize(color_size, color)
-      }
+        if opts['color']
+          color_size = (v * (k.length+6)) / 100
+          color = compute_color(v)
+          puts "#{@index[k]}) " + ("#{k} (#{v}%) "+" " * color_size).partial_colorize(color_size, color)
+        else
+          puts "#{@index[k]}) " + "#{k} (#{v}%) "
+        end
+        }
       # save in the same format as YAML::load
       Hash[@tasks.map{|k,v| [k, v]}]
     end
@@ -123,12 +127,14 @@ if $0 == __FILE__
     'done' => nil,
     'new' => nil,
     'delete' => nil,
+    'color' => nil
   }
   @options = OptionParser.new
   @options.separator ""
   #todo
   #@options.on('-p', '--pull', 'Pull') { opts['pull'] = true }
   #@options.on('-P', '--push', 'Push') { opts['push'] = true }
+  @options.on('-c', '--color', 'Color') { opts['color'] = true}
   @options.on('-s', '--show', 'Show all tasks (complete tasks)') { opts['all'] = true }
   @options.on('-u', '--update task_num,level', Array, 'Update task using id') {|opt| opts['update'] = opt }
   @options.on('-a', '--add task,level', Array, 'Adding a task to todo') {|opt| opts['new'] = opt }
